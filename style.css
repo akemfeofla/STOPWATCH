@@ -54,3 +54,24 @@ button {
 #millisec {
   font-size: 3em;
 }
+
+#timelog {
+  color: white;
+  font-size: 2em;
+  font-weight: 100;
+  text-align: center;
+  height: 400px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  text-align: center;
+}
+
+li {
+  list-style-type: none;
+  /* 화면에서 li태그가(timelog) 기록될 때 왼쪽에 점을 안 보이게 하기 */
+}

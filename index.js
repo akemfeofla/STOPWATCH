@@ -10,10 +10,13 @@ window.onload = function () {
   let buttonStop = document.getElementById('button-stop');
   let buttonReset = document.getElementById('button-reset');
   let Interval;
+  const timelog = document.querySelector('#timelog');
+  let recordCounter = 1; // 기록 번호 카운터
+  const timelogList = document.querySelector('#timelogList');
 
   buttonStart.onclick = function () {
     clearInterval(Interval);
-    Interval = setInterval(startTimer, 10); 
+    Interval = setInterval(startTimer, 10);
     //setInterval(함수, 시간): 시간 간격마다 함수 실행 10/1000 = 0.01초
   };
 
@@ -52,20 +55,40 @@ window.onload = function () {
       appendSeconds.innerHTML = seconds;
     }
   }
+
+  // 기록체크 기능 넣기
+
+  buttonStop.addEventListener('click', timeLog);
+
+  function timeLog() {
+    // 현재 시간 가져오기
+    const currentRecordTime = `${seconds}:${millisec}`;
+    // 기록을 listItem에 추가
+    const listItem = document.createElement('li');
+    listItem.textContent = `${recordCounter}:      ${currentRecordTime}`;
+    document.querySelector('#timelogList').appendChild(listItem);
+
+    recordCounter++;
+  }
+
+  buttonReset.addEventListener('click', resetTimeLog);
+  function resetTimeLog() {
+    recordCounter = 1; // 기록 번호 초기화
+    while (timelogList.firstChild) {
+      timelogList.removeChild(timelogList.firstChild);
+    }
+  }
 };
 
-// 기록체크 기능 넣기
+// function timeout(callback) {
+//   // callback은 timeout 함수의 매개변수로 콜백함수를 인수로 받아줌
+//   setTimeout(() => {
+//     console.log('0seo!');
+//     callback();
+//     // 실행 위치를 보장!
+//   }, 3000);
+// }
 
-
-function timeout(callback) {
-  // callback은 timeout 함수의 매개변수로 콜백함수를 인수로 받아줌
-    setTimeout(() => {
-      console.log('0seo!')
-      callback()
-      // 실행 위치를 보장!
-    }, 3000)
-  }
-  
-  timeout(() => {
-    console.log('Done!')
-  })
+// timeout(() => {
+//   console.log('Done!');
+// });
